@@ -1,13 +1,9 @@
-streamlit
-transformers
 qdrant-client
 langchain
 langchain-community
 langchain-groq
 sentence-transformers
-logging
-python-dotenv
-langchain_qdrant
-fastembed
 fastapi
 uvicorn
+langchain-qdrant
+fastembed
