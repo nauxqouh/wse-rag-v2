@@ -9,3 +9,5 @@ logging
 python-dotenv
 langchain_qdrant
 fastembed
+fastapi
+uvicorn
