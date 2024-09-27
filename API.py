@@ -8,7 +8,7 @@ app = FastAPI()
 
 EMBEDDINGS_MODEL_NAME = "BAAI/bge-m3"
 QDRANT_URL = "https://88bb6378-66e7-49db-a5de-6bb17f0d664a.europe-west3-0.gcp.cloud.qdrant.io:6333"
-HUGGINGFACE_API_KEY = "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"
+HUGGINGFACE_API_KEY = "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"
 QDRANT_API_KEY = "cLGVHbp48h0CZayJIXdxVW-JJijODOKpBFlzIPm6nvLHxRE4B_nrFA"
 RERANKER_MODEL_NAME = "BAAI/bge-reranker-v2-m3"
 GROQ_API_KEY = "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"
