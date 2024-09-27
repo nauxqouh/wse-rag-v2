@@ -42,8 +42,7 @@ class RAGPipelineSetup:
     def load_embeddings(self):
         bge_embeddings = HuggingFaceInferenceAPIEmbeddings(
             model_name=self.EMBEDDINGS_MODEL_NAME,
-            api_key=self.HUGGINGFACE_API_KEY,
-            model_kwargs={'device': 'auto'}
+            api_key=self.HUGGINGFACE_API_KEY
         )
         llm = ChatGroq(
          temperature=0, 
@@ -117,7 +116,7 @@ class RAGPipelineSetup:
     def load_rag_pipeline(self, llm, retriever, prompt):
         # Tạo QA chain với load_qa_chain
         qa_chain = load_qa_chain(llm, chain_type="stuff",prompt=prompt)  
-        memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
+        memory = ConversationBufferMemory(memory_key="chat_history",k=0, return_messages=True)
 
         _template ="""Bạn là một trợ lý thông minh. Nhiệm vụ của bạn là viết lại câu hỏi hiện tại một cách rõ ràng và dễ hiểu nhất có thể. Hãy ưu tiên giữ nguyên nội dung chính của câu hỏi hiện tại và chỉ sử dụng ngữ cảnh từ lịch sử trò chuyện nếu nó giúp làm rõ thêm ý nghĩa của câu hỏi. Không tự động thay đổi câu hỏi hiện tại dựa trên ngữ cảnh trước trừ khi thực sự cần thiết.
 
