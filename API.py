@@ -27,7 +27,6 @@ DATABASE_TO_COLLECTION = {
 class PromptRequest(BaseModel):
     prompt: str
     database: str
-    chat_history: List[str]
 
 @app.post("/api/query")
 async def query(prompt_request: PromptRequest):
@@ -46,7 +45,6 @@ async def query(prompt_request: PromptRequest):
 
     rag_pipeline = rag_setup.rag(source=selected_collection)
     context = {
-        "chat_history": prompt_request.chat_history,
         "question": prompt_request.prompt
     }
     response = rag_pipeline({"context": context})
