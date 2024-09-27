@@ -30,7 +30,7 @@ class RAGPipelineSetup:
             api_key=self.HUGGINGFACE_API_KEY
         )
         llm = ChatGroq(
-        temperature=0.3, 
+        temperature=0, 
         groq_api_key=self.GROQ_API_KEY, 
         model_name="gemma2-9b-it",
         max_tokens=50
