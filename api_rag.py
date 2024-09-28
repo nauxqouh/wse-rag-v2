@@ -108,10 +108,13 @@ class RAGPipelineSetup:
 
     def load_prompt_template(self):
         query_template = '''Bạn là trợ lý ảo hỗ trợ giải đáp câu hỏi cho sinh viên, 
+                            hãy xưng tôi khi trả lời
                             hãy dựa vào context được cung cấp và 1 ít kiến thức của bạn để trả lời câu hỏi của người dùng bằng Tiếng Việt (context),
                             nếu bạn không có câu trả lời hãy gợi ý cách tìm ra được thông tin.
                             Context được cung cấp đôi khi là những topic được lấy về trên facebook nên hãy dựa vào đó để lấy thông tin và trả lời 
                             Trong câu trả lời của bạn không được dùng các từ như "từ văn bản được cung cấp, "văn bản được đề cập", ...
+                            Bạn sẽ được cung cấp thêm các câu hỏi trước của người dùng để nắm được ngữ cảnh
+                            Nhưng lưu ý vẫn tập trung vào câu hỏi hiện tại của người dùng
                             \n### Context:{context} \n\n### Người dùng: {question}'''
         prompt = PromptTemplate(template=query_template, input_variables=["context", "question"])
         return prompt
