@@ -30,10 +30,9 @@ class RAGPipelineSetup:
             api_key=self.HUGGINGFACE_API_KEY
         )
         llm = ChatGroq(
-        temperature=0, 
+        temperature=0.3, 
         groq_api_key=self.GROQ_API_KEY, 
-        model_name="gemma2-9b-it",
-        max_tokens=50
+        model_name="gemma2-9b-it"
         )
         embeddings=HypotheticalDocumentEmbedder.from_llm(llm,bge_embeddings,prompt_key="web_search")
         return embeddings
@@ -81,7 +80,7 @@ class RAGPipelineSetup:
 
     def load_model_pipeline(self, max_new_tokens=1024):
         llm = ChatGroq(
-            temperature=0.3, 
+            temperature=0, 
             groq_api_key=self.GROQ_API_KEY, 
             model_name="llama3-groq-70b-8192-tool-use-preview"
         )
