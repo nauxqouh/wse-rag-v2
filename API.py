@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Request
 from pydantic import BaseModel
 import uvicorn
-from rag_llm import RAGPipelineSetup
+from api_rag import RAGPipelineSetup
 from typing import List
 
 app = FastAPI()
