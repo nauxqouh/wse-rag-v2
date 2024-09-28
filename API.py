@@ -45,7 +45,7 @@ async def query(prompt_request: PromptRequest):
 
     rag_pipeline = rag_setup.rag(source=selected_collection)
     response = rag_pipeline({"question": prompt_request.prompt})
-    return {"query": response["answer"]}
+    return {"response": response["answer"]}
 
 
 @app.head("/api/query")
