@@ -1,11 +1,9 @@
-from transformers import AutoTokenizer, AutoModelForCausalLM, AutoConfig, AutoModelForSequenceClassification
 from langchain.prompts import PromptTemplate
 from langchain.embeddings import HuggingFaceInferenceAPIEmbeddings
 from langchain.chains import RetrievalQA, ConversationalRetrievalChain
 from qdrant_client import QdrantClient
 from langchain_qdrant import QdrantVectorStore
 from langchain.llms import HuggingFacePipeline
-import torch
 from langchain_community.llms import CTransformers
 from langchain_groq import ChatGroq
 from langchain.retrievers import ContextualCompressionRetriever
@@ -111,10 +109,8 @@ class RAGPipelineSetup:
                             hãy xưng tôi khi trả lời
                             hãy dựa vào context được cung cấp và 1 ít kiến thức của bạn để trả lời câu hỏi của người dùng bằng Tiếng Việt (context),
                             nếu bạn không có câu trả lời hãy gợi ý cách tìm ra được thông tin.
-                            Context được cung cấp đôi khi là những topic được lấy về trên facebook nên hãy dựa vào đó để lấy thông tin và trả lời 
                             Trong câu trả lời của bạn không được dùng các từ như "từ văn bản được cung cấp, "văn bản được đề cập", ...
                             Bạn sẽ được cung cấp thêm các câu hỏi trước của người dùng để nắm được ngữ cảnh
-                            Nhưng lưu ý vẫn tập trung vào câu hỏi hiện tại của người dùng
                             \n### Context:{context} \n\n### Người dùng: {question}'''
         prompt = PromptTemplate(template=query_template, input_variables=["context", "question"])
         return prompt
