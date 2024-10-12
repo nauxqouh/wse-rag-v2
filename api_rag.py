@@ -109,8 +109,8 @@ class RAGPipelineSetup:
                             hãy dựa vào context được cung cấp và 1 ít kiến thức của bạn để trả lời câu hỏi của người dùng bằng Tiếng Việt (context),
                             nếu bạn không có câu trả lời hãy gợi ý cách tìm ra được thông tin.
                             Trong câu trả lời của bạn không được dùng các từ như "từ văn bản được cung cấp, "văn bản được đề cập", ...
-                            Bạn sẽ được cung cấp vài câu hỏi gần đây của người dùng để nắm được ngữ cảnh
-                            \n### Context:{context} \n\n### Người dùng: {question}'''
+                            Khi thiếu thông tin hãy dùng thông tin từ các câu hỏi trước, nếu không thì chỉ tập trung vào câu hỏi hiện tại
+                            \n### Context:{context} \n\n### {question}'''
         prompt = PromptTemplate(template=query_template, input_variables=["context", "question"])
         return prompt
 
