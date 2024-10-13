@@ -40,18 +40,28 @@ class RAGPipelineSetup:
 
     def load_embeddings(self):
         bge_embeddings = HuggingFaceInferenceAPIEmbeddings(
-             model_name=self.EMBEDDINGS_MODEL_NAME,
-             api_key=self.HUGGINGFACE_API_KEY
-         )
-        llm = ChatGroq(
-        temperature=0.3, 
-        groq_api_key=self.GROQ_API_KEY, 
-        model_name="gemma2-9b-it"
+            model_name=self.EMBEDDINGS_MODEL_NAME,
+            api_key=self.HUGGINGFACE_API_KEY,
         )
-        embeddings = HypotheticalDocumentEmbedder.from_llm(llm, bge_embeddings, prompt_key="web_search")
+        llm = ChatGroq(
+         temperature=0, 
+         groq_api_key=self.GROQ_API_KEY, 
+         model_name="gemma2-9b-it"
+         )
 
-        # embeddings = FastEmbedEmbeddings(model_name="sentence-transformers/paraphrase-multilingual-mpnet-base-v2")
-        # embeddings = HypotheticalDocumentEmbedder.from_llm(llm, embeddings, prompt_key="web_search")
+        prompt_template = """Bạn là nhà tư vấn tuyển sinh thông minh hỗ trợ giải đáp câu hỏi cho sinh viên, 
+                             hãy trả lời câu hỏi bằng tiếng việt
+                             câu hỏi của người dùng: {question}
+            """
+
+        prompt = PromptTemplate(input_variables=["question"], template=prompt_template)
+
+        llm_chain = LLMChain(llm=llm, prompt=prompt)
+        embeddings = HypotheticalDocumentEmbedder(
+                llm_chain=llm_chain,
+                base_embeddings=bge_embeddings
+            )
+        # embeddings = HypotheticalDocumentEmbedder.from_llm(llm, bge_embeddings, prompt_key="web_search")
         return embeddings
 
     def load_retriever(self, retriever_name, embeddings):
