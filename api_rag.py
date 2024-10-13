@@ -51,7 +51,8 @@ class RAGPipelineSetup:
 
         prompt_template = """Bạn là nhà tư vấn tuyển sinh thông minh hỗ trợ giải đáp câu hỏi cho sinh viên, 
                              hãy trả lời câu hỏi bằng tiếng việt
-                             câu hỏi của người dùng: {question}
+                             bạn sẽ được cung cấp vài câu hỏi gần đây của người dùng
+                            {question}
             """
 
         prompt = PromptTemplate(input_variables=["question"], template=prompt_template)
