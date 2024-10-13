@@ -1,5 +1,5 @@
 qdrant-client
-langchain
+langchain==0.2.14
 langchain-community
 langchain-groq
 sentence-transformers
