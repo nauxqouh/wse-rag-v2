@@ -43,27 +43,8 @@ class RAGPipelineSetup:
             model_name=self.EMBEDDINGS_MODEL_NAME,
             api_key=self.HUGGINGFACE_API_KEY,
         )
-        llm = ChatGroq(
-         temperature=0, 
-         groq_api_key=self.GROQ_API_KEY, 
-         model_name="gemma2-9b-it"
-         )
-
-        prompt_template = """Bạn là nhà tư vấn tuyển sinh thông minh hỗ trợ giải đáp câu hỏi cho sinh viên, 
-                             hãy trả lời câu hỏi bằng tiếng việt
-                             bạn sẽ được cung cấp vài câu hỏi gần đây của người dùng
-                            {question}
-            """
-
-        prompt = PromptTemplate(input_variables=["question"], template=prompt_template)
-
-        llm_chain = LLMChain(llm=llm, prompt=prompt)
-        embeddings = HypotheticalDocumentEmbedder(
-                llm_chain=llm_chain,
-                base_embeddings=bge_embeddings
-            )
-        # embeddings = HypotheticalDocumentEmbedder.from_llm(llm, bge_embeddings, prompt_key="web_search")
-        return embeddings
+        
+        return bge_embeddings
 
     def load_retriever(self, retriever_name, embeddings):
       # Tạo client kết nối với Qdrant
